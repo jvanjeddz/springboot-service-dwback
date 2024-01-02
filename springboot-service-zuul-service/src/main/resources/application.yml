@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: servicio-zuul-server
+server:
+  port: 8090
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+zuul:
+  routes:
+    store:
+      service-id: service-moneystore
+      path: /api/tienda/**
+    currencies:
+      service-id: service-dwback
+      path: /api/currencies/**
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 10000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 40000
